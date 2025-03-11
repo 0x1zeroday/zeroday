@@ -1,17 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>zeroday - Ethical Hacker | Malware developer</title>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/typing-effect"></script>
+    <title>zeroday - Ethical Hacker | Malware Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: black;
+            color: #00ff00;
+            overflow: hidden;
+        }
+
+        /* Lluvia de código binario */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Efecto de parpadeo */
+        .profile-content {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ff00;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .profile-gif {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00ff00;
+        }
+
+        .typing-container img {
+            display: block;
+            margin: 10px auto;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .location {
+            margin: 10px 0;
+        }
+
+        .flag-icon {
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        .discord-status {
+            margin-top: 10px;
+        }
+
+        .discord-widget img {
+            width: 100px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-icon img {
+            width: 40px;
+        }
+
+        .mute-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 20px;
+            background: none;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .mute-btn:hover {
+            background: #00ff00;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <video autoplay loop muted id="bg-video">
-        <source src="assets/Sweater Weather.mp3" type="video/mp4">
-    </video>
-    
+    <canvas id="matrix"></canvas>
+
     <div class="container">
         <div class="profile-content">
             <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
@@ -21,7 +124,7 @@
                     <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=2500&color=FF6B6B&center=true&vCenter=true&width=400&lines=zeroday" alt="Typing Effect">
                 </div>
                 
-                <p class="status zero">Ethical Hacker | Malware developer</p>
+                <p class="status">Ethical Hacker | Malware Developer</p>
                 
                 <div class="location">
                     <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
@@ -35,7 +138,7 @@
             </div>
             
             <div class="discord-widget">
-                <img src="assets/516659089061969952.png" alt="Discord Status" class="discord-status-image">
+                <img src="assets/516659089061969952.png" alt="Discord Status">
             </div>
         </div>
 
@@ -49,20 +152,57 @@
     </div>
 
     <script>
-        const video = document.getElementById('bg-video');
-        const muteButton = document.getElementById('muteButton');
+        // Lluvia de código binario (Efecto Matrix)
+        const canvas = document.getElementById("matrix");
+        const ctx = canvas.getContext("2d");
 
-        video.muted = true; 
-        video.play().catch(error => console.error('Error al reproducir video:', error));
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        muteButton.addEventListener('click', () => {
-            video.muted = !video.muted;
-            muteButton.textContent = video.muted ? '🔇' : '🔊';
+        const binaryChars = "01";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00ff00";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = binaryChars.charAt(Math.floor(Math.random() * binaryChars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        // Control de audio
+        const muteButton = document.getElementById("muteButton");
+        const audio = new Audio("assets/Sweater Weather.mp3");
+        audio.loop = true;
+        audio.volume = 0.5;
+        let isPlaying = false;
+
+        muteButton.addEventListener("click", () => {
+            if (isPlaying) {
+                audio.pause();
+                muteButton.textContent = "🔇";
+            } else {
+                audio.play().catch(error => console.error("Error al reproducir audio:", error));
+                muteButton.textContent = "🔊";
+            }
+            isPlaying = !isPlaying;
         });
-
-        document.addEventListener('click', () => {
-            if(video.paused) video.play();
-        }, { once: true });
     </script>
 </body>
 </html>
+
