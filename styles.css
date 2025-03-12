@@ -1,98 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
-
-body {
+* {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background: black;
-    font-family: 'Fira Code', monospace;
-    color: #0F0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
 }
 
+body {
+    background: black;
+    color: #00ff00;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Lluvia de código binario */
 canvas {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
 }
 
-/* Contenedor */
-.container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-/* Perfil con efecto de titileo */
-.profile-content {
+/* Contenedor principal */
+.profile-container {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
-    border: 2px solid #0F0;
-    text-align: center;
-    animation: flicker 0.15s infinite alternate;
+    box-shadow: 0 0 20px #00ff00;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
 }
 
 .profile-gif {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 2px solid #0F0;
+    border: 3px solid #00ff00;
 }
 
-/* Animación de titileo */
-@keyframes flicker {
-    0% { opacity: 1; }
-    50% { opacity: 0.8; }
-    100% { opacity: 1; }
-}
-
-/* Efectos de texto */
 .typing-container img {
-    filter: brightness(1.2);
+    margin: 10px auto;
 }
 
 .status {
-    font-size: 1.2em;
-    color: #FF6B6B;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .location {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 10px 0;
 }
 
 .flag-icon {
-    width: 30px;
-    margin-right: 10px;
+    width: 20px;
+    vertical-align: middle;
 }
 
-/* Discord */
 .discord-status {
     margin-top: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
 }
 
-/* Botón de mute */
-.mute-btn {
+.discord-widget img {
+    width: 100px;
+}
+
+.social-links {
     margin-top: 20px;
-    padding: 10px 15px;
-    background: black;
-    border: 2px solid #0F0;
-    color: #0F0;
+}
+
+.social-icon img {
+    width: 40px;
+}
+
+.mute-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 20px;
+    background: none;
+    border: 1px solid #00ff00;
+    color: #00ff00;
     cursor: pointer;
-    font-size: 1.2em;
+    transition: 0.3s;
 }
 
 .mute-btn:hover {
-    background: #0F0;
+    background: #00ff00;
     color: black;
+}
+
+/* Descripción con efecto de escritura */
+.description {
+    margin-top: 20px;
+    font-size: 18px;
+    color: red;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid red;
+    width: 0;
+    animation: typing 4s steps(50, end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
