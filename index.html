@@ -7,44 +7,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="matrix"></canvas>
+    <!-- Fondo de lluvia de código binario -->
+    <canvas id="binaryRain"></canvas>
 
-    <div class="profile-container">
-        <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
-        
-        <div class="user-info">
-            <div class="typing-container">
-                <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=2500&color=FF6B6B&center=true&vCenter=true&width=400&lines=zeroday" alt="Typing Effect">
-            </div>
-            
-            <p class="status">Ethical Hacker | Malware Developer</p>
-            
-            <div class="location">
-                <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
-                <span>Argentina</span>
-            </div>
-            
-            <div class="discord-status">
-                <p class="username">zeroday</p>
-                <p class="activity">Status: Do not disturb</p>
+    <!-- Audio de fondo -->
+    <audio id="bg-audio" loop>
+        <source src="assets/Sweater Weather.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <div class="profile-content">
+            <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
+            <div class="user-info">
+                <h1 id="typing-text"></h1>
+                <p class="status">Ethical Hacker | Malware Developer</p>
+                <div class="location">
+                    <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
+                    <span>Argentina</span>
+                </div>
+                <div class="discord-status">
+                    <p class="username">zeroday</p>
+                    <p class="activity">Status: Do not disturb</p>
+                </div>
             </div>
         </div>
-        
-        <div class="discord-widget">
-            <img src="assets/516659089061969952.png" alt="Discord Status">
-        </div>
 
-        <div class="social-links">
-            <a href="https://github.com/0x1zeroday" target="_blank" class="social-icon">
-                <img src="assets/github-icon.png" alt="GitHub">
-            </a>
-        </div>
+        <!-- Descripción con efecto de escritura -->
+        <p id="description"></p>
 
-        <button id="muteButton" class="mute-btn">🔊</button>
+        <!-- Botón de mute/unmute -->
+        <button id="muteButton">🔊</button>
     </div>
-
-    <!-- Descripción con efecto de escritura -->
-    <p class="description">Apasionado por el Hacking Ético, Redes, Reversing y el Desarrollo de Malware.</p>
 
     <script src="script.js"></script>
 </body>
