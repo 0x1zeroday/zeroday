@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
+    <title>zeroday - Ethical Hacker | Malware developer</title>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zeroday - Ethical Hacker | Malware Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/typing-effect"></script>
 </head>
 <body>
-    <!-- Fondo de lluvia de código binario -->
-    <canvas id="binaryRain"></canvas>
-
-    <!-- Audio de fondo -->
-    <audio id="bg-audio" loop>
-        <source src="assets/Sweater Weather.mp3" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
-    </audio>
-
-    <!-- Contenedor principal -->
+    <video autoplay loop muted id="bg-video">
+        <source src="assets/Sweater Weather.mp3" type="video/mp4">
+    </video>
+    
     <div class="container">
         <div class="profile-content">
             <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
+            
             <div class="user-info">
-                <h1 id="typing-text"></h1>
-                <p class="status">Ethical Hacker | Malware Developer</p>
+                <div class="typing-container">
+                    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=2500&color=FF6B6B&center=true&vCenter=true&width=400&lines=zeroday" alt="Typing Effect">
+                </div>
+                
+                <p class="status zero">Ethical Hacker | Malware developer</p>
+                
                 <div class="location">
                     <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
                     <span>Argentina</span>
                 </div>
+                
                 <div class="discord-status">
                     <p class="username">zeroday</p>
                     <p class="activity">Status: Do not disturb</p>
                 </div>
             </div>
+            
+            <div class="discord-widget">
+                <img src="assets/516659089061969952.png" alt="Discord Status" class="discord-status-image">
+            </div>
         </div>
 
-        <!-- Descripción con efecto de escritura -->
-        <p id="description"></p>
+        <div class="social-links">
+            <a href="https://github.com/0x1zeroday" target="_blank" class="social-icon">
+                <img src="assets/github-icon.png" alt="GitHub">
+            </a>
+        </div>
 
-        <!-- Botón de mute/unmute -->
-        <button id="muteButton">🔊</button>
+        <button id="muteButton" class="mute-btn">🔊</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const video = document.getElementById('bg-video');
+        const muteButton = document.getElementById('muteButton');
+
+        video.muted = true; 
+        video.play().catch(error => console.error('Error al reproducir video:', error));
+
+        muteButton.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteButton.textContent = video.muted ? '🔇' : '🔊';
+        });
+
+        document.addEventListener('click', () => {
+            if(video.paused) video.play();
+        }, { once: true });
+    </script>
 </body>
 </html>
-
