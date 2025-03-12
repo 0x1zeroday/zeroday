@@ -3,45 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zeroday - Ethical Hacker | Malware developer</title>
+    <title>zeroday - Ethical Hacker | Malware Developer</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/typing-effect"></script>
 </head>
 <body>
+    <canvas id="matrix"></canvas>
 
-    <!-- Lluvia de código binario -->
-    <canvas id="binaryCanvas"></canvas>
-
-    <!-- Audio de fondo -->
-    <audio autoplay loop id="bg-audio">
-        <source src="assets/Sweater Weather.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="container">
-        <div class="profile-content flickering">
-            <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
+    <div class="profile-container">
+        <img src="assets/434cde5002ef8de61a8e2997264dd3ab.gif" alt="Profile" class="profile-gif">
+        
+        <div class="user-info">
+            <div class="typing-container">
+                <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=2500&color=FF6B6B&center=true&vCenter=true&width=400&lines=zeroday" alt="Typing Effect">
+            </div>
             
-            <div class="user-info">
-                <div class="typing-container">
-                    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=2500&color=FF6B6B&center=true&vCenter=true&width=400&lines=zeroday" alt="Typing Effect">
-                </div>
-                
-                <p class="status zero">Ethical Hacker | Malware developer</p>
-                
-                <div class="location">
-                    <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
-                    <span>Argentina</span>
-                </div>
-                
-                <div class="discord-status">
-                    <p class="username">zeroday</p>
-                    <p class="activity">Status: Do not disturb</p>
-                </div>
+            <p class="status">Ethical Hacker | Malware Developer</p>
+            
+            <div class="location">
+                <img src="assets/argentina-flag.png" alt="Argentina Flag" class="flag-icon">
+                <span>Argentina</span>
             </div>
-
-            <div class="discord-widget">
-                <img src="assets/516659089061969952.png" alt="Discord Status" class="discord-status-image">
+            
+            <div class="discord-status">
+                <p class="username">zeroday</p>
+                <p class="activity">Status: Do not disturb</p>
             </div>
+        </div>
+        
+        <div class="discord-widget">
+            <img src="assets/516659089061969952.png" alt="Discord Status">
         </div>
 
         <div class="social-links">
@@ -53,62 +43,10 @@
         <button id="muteButton" class="mute-btn">🔊</button>
     </div>
 
-    <script>
-        // Efecto de lluvia de código binario
-        const canvas = document.getElementById("binaryCanvas");
-        const ctx = canvas.getContext("2d");
+    <!-- Descripción con efecto de escritura -->
+    <p class="description">Apasionado por el Hacking Ético, Reversing y el Desarrollo de Malware.</p>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const binarios = "01010110101001101001011010010101";
-        const binariosArr = binarios.split("");
-
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * canvas.height;
-        }
-
-        function drawBinaryRain() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px monospace";
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = binariosArr[Math.floor(Math.random() * binariosArr.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(drawBinaryRain, 50);
-
-        // Audio y muteo
-        const audio = document.getElementById('bg-audio');
-        const muteButton = document.getElementById('muteButton');
-
-        audio.volume = 0.3;
-        muteButton.addEventListener('click', () => {
-            audio.muted = !audio.muted;
-            muteButton.textContent = audio.muted ? '🔇' : '🔊';
-        });
-
-        // Reproducir audio solo si el usuario interactúa
-        document.addEventListener('click', () => {
-            if (audio.paused) audio.play();
-        }, { once: true });
-
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
 
